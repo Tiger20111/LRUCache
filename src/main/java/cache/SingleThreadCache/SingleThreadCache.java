@@ -2,7 +2,6 @@ package cache.SingleThreadCache;
 
 import cache.Cache;
 import cache.order.Order;
-import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,18 +9,25 @@ import java.util.Map;
 public class SingleThreadCache implements Cache {
     private Map<Object, Object> cache;
     private Order order;
-    private final int size;
+    private final int capacity;
 
-    public SingleThreadCache(int size, Order order) {
-        this.size = size;
-        this.cache = new HashMap<Object, Object>(size);
+    public SingleThreadCache(int capacity, Order order) {
+        this.capacity = capacity;
+        this.cache = new HashMap<Object, Object>(capacity);
         this.order = order;
     }
 
+    @Override
     public Object get(Object key) {
         return cache.get(key);
     }
 
+    @Override
+    public int size() {
+        return cache.size();
+    }
+
+    @Override
     public void put(Object key, Object value) {
         if (cache.containsKey(key)) {
             updateElement(key, value);
@@ -37,7 +43,7 @@ public class SingleThreadCache implements Cache {
     }
 
     private void addNewElement(Object key, Object value) {
-        if (cache.size() == size) {
+        if (cache.size() == capacity) {
             Object pollKey = order.poll();
             cache.remove(pollKey);
         }

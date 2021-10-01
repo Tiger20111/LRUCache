@@ -12,4 +12,9 @@ public class MultiThreadCache implements Cache {
     public Object get(Object key) {
         return null;
     }
+
+    @Override
+    public int size() {
+        return 0;
+    }
 }

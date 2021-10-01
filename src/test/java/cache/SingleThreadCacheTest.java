@@ -12,20 +12,22 @@ import java.util.ArrayList;
 public class SingleThreadCacheTest {
     private Cache cache;
     private Order order;
-    private int size;
+    private int capacity;
 
     @Test
     public void singleThreadLRUCacheTest() {
-        size = 5;
+        capacity = 5;
         order = new LRUOrder();
-        cache = new SingleThreadCache(size, order);
+        cache = new SingleThreadCache(capacity, order);
         ArrayList<Integer> data = Data.getSingleThreadTestData();
         for (int i = 0; i < data.size(); i++) {
+            Assert.assertEquals(cache.size(), Math.min(i, capacity));
             cache.put(i, data.get(i));
         }
 
-        for (int i = data.size() - 1; i > data.size() - 1 - size; i --) {
-            Assert.assertTrue((Integer)cache.get(i) == i);
+        for (int i = data.size() - 1; i > data.size() - 1 - capacity; i --) {
+            Assert.assertEquals((int) (Integer) cache.get(i), i);
         }
+
     }
 }
