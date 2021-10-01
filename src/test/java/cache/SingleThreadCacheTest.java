@@ -3,7 +3,6 @@ package cache;
 import cache.SingleThreadCache.SingleThreadCache;
 import cache.order.LRUOrder;
 import cache.order.Order;
-import com.sun.source.tree.AssertTree;
 import org.junit.Assert;
 import org.junit.Test;
 

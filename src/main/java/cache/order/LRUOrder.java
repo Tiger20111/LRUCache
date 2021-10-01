@@ -1,9 +1,6 @@
 package cache.order;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class LRUOrder implements Order{
     LinkedList<Object> queue;
