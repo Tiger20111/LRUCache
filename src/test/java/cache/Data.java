@@ -10,4 +10,12 @@ public class Data {
         }
         return data;
     }
+
+    public static ArrayList<Integer> getMultiThreadTestData() {
+        ArrayList<Integer> data = new ArrayList<Integer>();
+        for (int i = 0; i < 1_000_000; i++) {
+            data.add(i);
+        }
+        return data;
+    }
 }
